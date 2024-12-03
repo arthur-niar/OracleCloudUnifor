@@ -31,6 +31,7 @@ async function fetchProducts() {
     const updateButton = document.createElement('button');
     updateButton.innerHTML = 'Update';
     updateButton.addEventListener('click', () => {
+      // Populate the update form with the product's data
       updateProductId.value = product.id;
       updateProductName.value = product.name;
       updateProductPrice.value = product.price;
@@ -41,7 +42,6 @@ async function fetchProducts() {
   });
 }
 
-
 // Event listener for Add Product form submit button
 addProductForm.addEventListener('submit', async event => {
   event.preventDefault();
@@ -50,6 +50,17 @@ addProductForm.addEventListener('submit', async event => {
   await addProduct(name, price);
   addProductForm.reset();
   await fetchProducts();
+});
+
+// Event listener for Update Product form submit button
+updateProductForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const id = updateProductId.value;
+  const name = updateProductName.value;
+  const price = updateProductPrice.value;
+  await updateProduct(id, name, price);
+  updateProductForm.reset(); // Clear the update form
+  await fetchProducts(); // Refresh the product list
 });
 
 // Function to add a new product
@@ -71,7 +82,18 @@ async function deleteProduct(id) {
     headers: {
       'Content-Type': 'application/json'
     },
-    //body: JSON.stringify({id})
+  });
+  return response.json();
+}
+
+// Function to update a product
+async function updateProduct(id, name, price) {
+  const response = await fetch(`http://localhost:3000/products/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, price }),
   });
   return response.json();
 }
