@@ -1,26 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product CRUD</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilos básicos */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #6200ea;
+      color: #fff;
+      padding: 20px 10px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      color: #6200ea;
+    }
+
+    form {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    form input {
+      width: calc(100% - 20px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      background: #6200ea;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    form button:hover {
+      background: #4500b3;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul li button {
+      background: #ff5252;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    ul li button.update {
+      background: #03dac6;
+      margin-right: 10px;
+    }
+
+    ul li button:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background: #6200ea;
+      color: #fff;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Product CRUD</h1>
+  <header>
+    <h1>Product Management</h1>
+  </header>
 
-  <form id="add-product-form">
-    <h2>Add Product</h2>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <label for="price">Price:</label>
-    <input type="number" id="price" name="price" required step="0.01">
-    <button type="submit">Add</button>
-  </form>
+  <main>
+    <!-- Formulário de Adicionar Produto -->
+    <form id="add-product-form">
+      <h2>Arthur Eletrônicos</h2>
+      <label for="name">Nome:</label>
+      <input type="text" id="name" name="name" required placeholder="Nome do produto">
+      
+      <label for="price">Preço:</label>
+      <input type="number" id="price" name="price" required step="0.01" placeholder="Preço do produto">
+      
+      <button type="submit">Adicionar produto</button>
+    </form>
 
-  <ul id="products"></ul>
+    <!-- Formulário de Atualizar Produto -->
+    <form id="update-product-form">
+      <h2>Atualizar Produto</h2>
+      <input type="hidden" id="update-id">
+      <label for="update-name">Nome:</label>
+      <input type="text" id="update-name" required placeholder="Novo nome do produto">
+      
+      <label for="update-price">Preço:</label>
+      <input type="number" id="update-price" required step="0.01" placeholder="Novo preço do produto">
+      
+      <button type="submit">Atualizar produto</button>
+    </form>
+
+    <!-- Lista de Produtos -->
+    <section>
+      <h2>Carrinho de Compras</h2>
+      <ul id="products"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Product CRUD System</p>
+  </footer>
 
   <script src="app.js"></script>
   <script>
-    // Call fetchProducts() when the page loads
     window.addEventListener('load', fetchProducts);
   </script>
 </body>
